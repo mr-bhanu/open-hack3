@@ -1,0 +1,91 @@
+!git clone https://github.com/mr-bhanu/open-hack3.git
+%cd open-hack3/
+from IPython .display import clear_output
+clear_output
+
+
+
+
+
+
+from google.colab.patches import cv2_imshow
+from PIL import Image,ImageEnhance,ImageFilter
+img = Image.open("r1.jpg")
+print(img.size)
+
+#rotate
+im = Image.open("r2.jpg")
+im.show()
+im = im.rotate(45)
+im.show()
+im.save("output/rotate.jpg")
+
+#merger
+image1 = Image.open('r1.jpg')
+image1.show()
+image2 = Image.open('r3.jpg')
+image2.show()
+#resize, first image
+
+image1_size = image1.size
+image2_size = image2.size
+new_image = Image.new('RGB',(2*image1_size[0], image1_size[1]), (250,250,250))
+new_image.paste(image1,(0,0))
+new_image.paste(image2,(image1_size[0],0))
+new_image.save("output/merge.jpg")
+new_image.show()
+#blur
+OriImage = Image.open('r3.jpg')
+OriImage.show()
+
+blurImage = OriImage.filter(ImageFilter.BLUR)
+blurImage.show()
+#Save blurImage
+blurImage.save('output/simBlurImage.jpg')
+
+#gray
+img = Image.open('r2.jpg')
+img_cov = img.convert('L')
+#show image
+img_cov.show()
+#save image
+img_cov.save("output/gray.jpg")
+
+
+#contour
+from PIL.ImageFilter import (
+   BLUR, CONTOUR, DETAIL, EDGE_ENHANCE, EDGE_ENHANCE_MORE,
+   EMBOSS, FIND_EDGES, SMOOTH, SMOOTH_MORE, SHARPEN
+)
+#Create image object
+img = Image.open('r3.jpg')
+#Applying the blur filter
+img1 = img.filter(CONTOUR)
+img1.save('output/ImageFilter_blur.jpg')
+
+#detail
+img = Image.open('r2.jpg')
+#Applying the blur filter
+img1 = img.filter(DETAIL)
+img1.save('output/detail.jpg')
+
+#edge
+img = Image.open('r2.jpg')
+#Applying the blur filter
+img1 = img.filter(EDGE_ENHANCE)
+img1.save('output/edge.jpg')
+img1.show()
+
+#emboss
+img = Image.open('r3.jpg')
+#Applying the blur filter
+img1 = img.filter(EMBOSS)
+img1.save('output/emboss.jpg')
+img1.show()
+
+#sharp
+img = Image.open('r1.jpg')
+#Applying the blur filter
+img1 = img.filter(SHARPEN)
+img1.save('output/sharp.jpg')
+img1.show()
